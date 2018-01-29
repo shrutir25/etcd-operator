@@ -472,6 +472,7 @@ func (c *Cluster) createPod(members etcdutil.MemberSet, m *etcdutil.Member, stat
 }
 
 func (c *Cluster) removePod(name string) error {
+	fmt.Printf("Stack trace output is : %v\n", Stack())
 	ns := c.cluster.Namespace
 	opts := metav1.NewDeleteOptions(podTerminationGracePeriod)
 	err := c.config.KubeCli.Core().Pods(ns).Delete(name, opts)

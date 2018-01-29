@@ -37,11 +37,13 @@ type Member struct {
 }
 
 func (m *Member) Addr() string {
+	fmt.Printf("function: Addr, nameofMember: %s, member: %s\n", m.Name, fmt.Sprintf("%s.%s.%s.svc", m.Name, clusterNameFromMemberName(m.Name), m.Namespace))
 	return fmt.Sprintf("%s.%s.%s.svc", m.Name, clusterNameFromMemberName(m.Name), m.Namespace)
 }
 
 // ClientURL is the client URL for this member
 func (m *Member) ClientURL() string {
+	fmt.Printf("function: ClientURL, nameofMember: %s, clientURL: %s\n", m.Name, fmt.Sprintf("%s://%s:2379", m.clientScheme(), m.Addr()))
 	return fmt.Sprintf("%s://%s:2379", m.clientScheme(), m.Addr())
 }
 
@@ -60,13 +62,16 @@ func (m *Member) peerScheme() string {
 }
 
 func (m *Member) ListenClientURL() string {
+	fmt.Printf("function: ListenClientURL, nameofMember: %s, ListenClientURL: %s\n", m.Name, fmt.Sprintf("%s://0.0.0.0:2379", m.clientScheme()))
 	return fmt.Sprintf("%s://0.0.0.0:2379", m.clientScheme())
 }
 func (m *Member) ListenPeerURL() string {
+	fmt.Printf("function: ListenPeerURL, nameofMember: %s, ListenPeerURL: %s\n", m.Name, fmt.Sprintf("%s://0.0.0.0:2380", m.peerScheme()))
 	return fmt.Sprintf("%s://0.0.0.0:2380", m.peerScheme())
 }
 
 func (m *Member) PeerURL() string {
+	fmt.Printf("function: PeerURL, nameofMember: %s, PeerURL: %s\n", m.Name, fmt.Sprintf("%s://%s:2380", m.peerScheme(), m.Addr()))
 	return fmt.Sprintf("%s://%s:2380", m.peerScheme(), m.Addr())
 }
 
